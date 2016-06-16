@@ -18,18 +18,34 @@ public class MyScanner {
 	 * @param lines 行数
 	 * @return
 	 */
-	public static ArrayList<String> getStrings(int type, String separator, int lines) {
+	public static ArrayList<String> getStrings(String separator, int lines) {
 		
 		Scanner scanner=new Scanner(System.in);
 		ArrayList<String> strings=new ArrayList<String>();
 		for (int i = 0; i < lines; i++) {
 			String lineString=scanner.nextLine();
-			String[] strings2=lineString.split("separator");
+			String[] strings2=lineString.split(separator);
 			for (String string : strings2) {
 				strings.add(string);
 			}
 		}
+		scanner.close();
 		return strings;
 	}
 	
+	/**
+	 * 从控制台读取整数型输入数组
+	 * @param separator
+	 * @param lines
+	 * @return
+	 */
+	public static int[] getInts(String separator, int lines) {
+		ArrayList<String> a=getStrings(separator, lines);
+		int[] b=new int[a.size()];
+		for (int i = 0; i < b.length; i++) {
+			//System.out.println(a.get(i));
+			b[i]=Integer.valueOf(a.get(i));
+		}
+		return b;
+	}	
 }
