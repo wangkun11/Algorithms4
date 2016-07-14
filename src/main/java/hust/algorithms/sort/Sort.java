@@ -69,4 +69,23 @@ public abstract class Sort {
 			}
 		}
 	}
+	//快排的切分
+	protected int partition(Comparable[] a,int low,int high){
+		int i=low,j=high;//左右扫描指针
+		Comparable v=a[low];//切分元素
+		while (true) {
+			//扫描左右，检查扫描是否结束，若没有则并交换元素，最终小于v的交换到v左边，大与v的交换到v右边
+			while (less(a[++i], v)) {
+				if(i==high) break;				
+			}
+			while (less(v, a[--j])) {
+				if(j==low) break;	//此处判断可以去掉，因为，当j==low时，less(v,a[low])为false，自然会退出while循环，此处的v本身具备哨兵的作用			
+			}
+			if (i>=j) break;
+			exchange(a, i, j);			
+		}
+		//最终将v交换到中间去（此时i=j）
+		exchange(a, low, j);
+		return j;
+	}
 }

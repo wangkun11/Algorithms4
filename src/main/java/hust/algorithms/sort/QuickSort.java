@@ -12,10 +12,23 @@ public class QuickSort extends Sort {
 	@Override
 	protected void sort(Comparable[] a) {
 		MyTools.shuffle(a);//乱序：消除输入依赖
+		sort(a, 0, a.length-1);
 	}
 	private void sort(Comparable[] a ,int low,int high){
+		/**
+		 * 此处可以替换为：（M的最佳值与系统相关）
+		 * if(hi<=low+M)
+		 * {
+		 *     InsertionSort.sort(a,low,high);
+		 *     return;
+		 * }
+		 * 在排序数组较小时，切换到基本排序算法，以避免过多的迭代
+		 */
 		if(high<=low) return;
 		
+		int j=partition(a, low, high);   //切分
+		//左右两部分再迭代排序
+		sort(a,low,j-1);   
+		sort(a, j+1, high);
 	}
-
 }
